@@ -32,7 +32,7 @@ function MainContainer(props){
 	];
 */
 
-  const [orders, setOrders] = useState([]);
+  const [myOrders, setOrders] = useState([]);
 
   useEffect(() => {
     fetchOrders() // Fetch orders
@@ -57,7 +57,7 @@ function MainContainer(props){
     <div>
       <BookContainer books={BOOKS} onBookSelection={updateBook}/>
       <OrderConfirmation message={props.orderStatus}/>
-      <OrdersContainer orders={orders}/>
+      <OrdersContainer orders={myOrders}/>
     </div>
   )
 }
