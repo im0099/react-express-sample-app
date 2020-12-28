@@ -3,10 +3,23 @@ import { withRouter } from 'react-router-dom'
 
 
 function Checkout(props){
+  	  
+  const [order, setOrder] = useState(props.checkoutBook);
+  const [stripeSecret, setSecret] = useState("");
+
+  useEffect(() => {
+    getPaymentIntent() // Fetch orders
+  }, []);
   
-  console.log("In Checkout");
-	  
-  const [order, setOrder] = useState(props.checkoutBook)
+
+  const getPaymentIntent = () => {
+    fetch('http://localhost:9000/orders/orderIntent', {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((result) => setSecret(result.client_secret))
+      .catch((err) => console.log('error in secret fetch'+err))
+  }
 
   const saveOrder = () => {
     fetch('http://localhost:9000/orders', {

@@ -16,28 +16,19 @@ router.get("/", async function(req, res, next) {
 
     console.log(orders);
     res.json(orders);
-    //res.send('Book API is working');
+});
 
-	/*
-	const paymentIntent = stripe.paymentIntents.create({
-  		amount: 99.99,
-  		currency: 'usd',
-  		// Verify your integration in this guide by including this parameter
-  		metadata: {integration_check: 'accept_a_payment'},
-	});
-	*/
-	
-/*
-	const paymentIntent = await stripe.paymentIntents.create({
-	  amount: 1099,
-	  currency: 'usd',
-	  // Verify your integration in this guide by including this parameter
-	  metadata: {integration_check: 'accept_a_payment'},
-	});
+router.get("/orderIntent", async function(req, res, next) {
+
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: 1099,
+    currency: 'usd',
+    // Verify your integration in this guide by including this parameter
+    metadata: {integration_check: 'accept_a_payment'},
+  });
     res.json({client_secret: paymentIntent.client_secret});
 
     //res.send('Orders API is working');
-    */
 });
 
 router.post("/", async function(req, res, next) {
