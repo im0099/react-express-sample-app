@@ -4,7 +4,6 @@ import BookCard from '../components/BookCard'
 function BookContainer(props){
 
   const updateBook = (bookId) => {
-      console.log("BookContainer chosenBook:"+ bookId);
       props.onBookSelection(bookId);
     }
 

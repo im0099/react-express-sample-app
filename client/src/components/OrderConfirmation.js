@@ -4,7 +4,7 @@ function OrderConfirmation(props){
 
   return (
     <div>
-      <p>{props.orderMessage}</p>
+      <p>Order Status: {props.message}</p>
     </div>
   )
 }

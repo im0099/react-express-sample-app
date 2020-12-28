@@ -24,7 +24,7 @@ function MainContainer(props){
   ];
 
 /*
-  const ORDERS = [
+  const orders = [
   	{ id: '1',
 	  item: '20201223'},
 	 { id: '2',
@@ -32,11 +32,7 @@ function MainContainer(props){
 	];
 */
 
-
-
   const [orders, setOrders] = useState([]);
-  console.log("Orders: " + orders);
-
 
   useEffect(() => {
     fetchOrders() // Fetch orders
@@ -54,14 +50,13 @@ function MainContainer(props){
   
 
   const updateBook = (bookId) => {
-      console.log("MainContainer chosenBook:"+ bookId);
       props.onBookSelection(bookId);
   }
 
   return (
     <div>
       <BookContainer books={BOOKS} onBookSelection={updateBook}/>
-      <OrderConfirmation/>
+      <OrderConfirmation message={props.orderStatus}/>
       <OrdersContainer orders={orders}/>
     </div>
   )

@@ -6,7 +6,6 @@ import { Link, withRouter } from "react-router-dom";
 function BookCard (props) {
 
     const updateBook = () => {
-      console.log("BookCard chosenBook:"+ props.book.id);
       props.onBookSelection(props.book.id);
     }
 

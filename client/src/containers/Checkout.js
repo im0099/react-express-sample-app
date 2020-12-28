@@ -26,7 +26,8 @@ function Checkout(props){
   const handleSubmit = (event) => {
     event.preventDefault();
     saveOrder(); // Save order when form is submitted
-    props.history.push('/');
+    props.history.push('/'); // assuming there aren't errors
+    props.onOrderPlaced(order);
   }
 
   return (
