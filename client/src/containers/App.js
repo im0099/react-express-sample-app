@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //import BookContainer from './BookContainer'
 import MainContainer from './MainContainer'
@@ -6,7 +6,7 @@ import Checkout from './Checkout'
 
 
 function App () {
-    const [checkoutBook, setBook] = React.useState('');
+    const [checkoutBook, setBook] = React.useState({});
     const [orderStatus, setOrderStatus] = useState('');
 
     const updateBook = (chosenBook) => {
@@ -14,7 +14,6 @@ function App () {
     }
 
     const getOrderStatus = (newOrderStatus) => {
-      console.log("new order status:" +newOrderStatus);
       setOrderStatus(newOrderStatus);
     }
 

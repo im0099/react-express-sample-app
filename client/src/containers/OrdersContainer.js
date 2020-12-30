@@ -4,7 +4,7 @@ function OrdersContainer(props){
 
   function renderOrders(){
     return props.orders.map(order => {
-      return <tr key={order.item}><th>{order.id}</th><th>{order.item}</th></tr>
+      return <tr key={order.id}><th>{order.id}</th><th>{order.item}</th><th>{order.price}</th></tr>
     })
   }
 
@@ -16,6 +16,7 @@ function OrdersContainer(props){
         <tr>
           <th>ID</th>
           <th>Item</th>
+          <th>Price</th>
         </tr>
       </thead>
       <tbody>{renderOrders()}</tbody>

@@ -3,8 +3,8 @@ import BookCard from '../components/BookCard'
 
 function BookContainer(props){
 
-  const updateBook = (bookId) => {
-      props.onBookSelection(bookId);
+  const updateBook = (book) => {
+      props.onBookSelection(book);
     }
 
   function renderBooks(){

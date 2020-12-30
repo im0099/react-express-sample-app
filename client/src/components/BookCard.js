@@ -1,12 +1,10 @@
 import React from 'react'
-import { ElementsConsumer, Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function BookCard (props) {
 
     const updateBook = () => {
-      props.onBookSelection(props.book.id);
+      props.onBookSelection(props.book);
     }
 
     return (

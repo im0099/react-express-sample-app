@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
+const util = require('util');
 const Stripe = require('stripe');
 //=================
 // STRIPE
@@ -18,10 +19,17 @@ router.get("/", async function(req, res, next) {
     res.json(orders);
 });
 
-router.get("/orderIntent", async function(req, res, next) {
+router.post("/orderIntent", async function(req, res, next) {
 
+  const body = req.body;
+  //console.log("bookID inspect: " + util.inspect(bookId, {showHidden: false, depth: null}))
+
+  
+  // hardcode book prices for now
+  const price = new Map([['20201223', '1299'], ['20201224', '11499'], ['20201225', '2499']])
+  
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: 1099,
+    amount: price.get(body.bookId),
     currency: 'usd',
     // Verify your integration in this guide by including this parameter
     metadata: {integration_check: 'accept_a_payment'},
@@ -33,11 +41,10 @@ router.get("/orderIntent", async function(req, res, next) {
 
 router.post("/", async function(req, res, next) {
 
-	const order = req.body;
+	const body = req.body;
 
-    // Output the book to the console for debugging
-    console.log(order);
-    orders.push(order);
+    //console.log("Order inspect: " + util.inspect(body, {showHidden: false, depth: null}))
+    orders.push(body);
 
     res.send('Order is added to the database');
     //res.send('Orders API is working');

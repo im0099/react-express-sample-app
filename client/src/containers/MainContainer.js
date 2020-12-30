@@ -49,8 +49,8 @@ function MainContainer(props){
   }
   
 
-  const updateBook = (bookId) => {
-      props.onBookSelection(bookId);
+  const updateBook = (book) => {
+      props.onBookSelection(book);
   }
 
   return (

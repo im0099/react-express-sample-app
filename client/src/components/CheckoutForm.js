@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 import { withRouter } from 'react-router-dom'
 import CardSection from './CardSection';
@@ -9,7 +9,10 @@ function CheckoutForm(props){
   const stripe = useStripe();
   const elements = useElements();
 
-  const [order, setOrder] = useState(props.bookId);
+  const orderId = Math.floor(Math.random() * Date.now());
+  //const initOrder = new Map([['id', orderId], ['item', props.bookId], ['price', '11.11']]);
+  //const [order, setOrder] = useState(initOrder);
+
   const saveOrder = () => {
     fetch('http://localhost:9000/orders', {
       method: 'POST',
@@ -17,11 +20,16 @@ function CheckoutForm(props){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        item: order, // Use your own property name / key
-      }),
+    	id: orderId,
+    	item: props.book.id,
+    	price: props.book.price,
+  	  }),
     })
       .then((res) => res.json())
-      .then((result) => setOrder(result.rows))
+      .then((result) => {
+      	console.log("in fetch Order: " + result);
+      	//setOrder(result.rows);
+  	})
       .catch((err) => console.log('error'+err))
   }
 
