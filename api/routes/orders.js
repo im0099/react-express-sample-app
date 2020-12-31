@@ -41,7 +41,7 @@ router.post("/orderIntent", async function(req, res, next) {
 
 
 router.post('/webhook', async (req, res) => {
-  
+  /*
   const sig = req.headers['stripe-signature'] as string;
   const endpointSecret = 'whsec_...';
 
@@ -74,6 +74,7 @@ router.post('/webhook', async (req, res) => {
   }
 
   res.sendStatus(200);
+  */
 });
 
 router.post("/", async function(req, res, next) {
