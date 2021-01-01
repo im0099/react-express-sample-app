@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 import { withRouter } from 'react-router-dom'
 import CardSection from './CardSection';
+import OrderConfirmation from './OrderConfirmation'
+
 
 //export default function CheckoutForm() {
 
 function CheckoutForm(props){
   const stripe = useStripe();
   const elements = useElements();
+
+  const [orderStatus, setOrderStatus] = useState('');
+
 
   const orderId = Math.floor(Math.random() * Date.now());
   //const initOrder = new Map([['id', orderId], ['item', props.bookId], ['price', '11.11']]);
@@ -55,7 +60,8 @@ function CheckoutForm(props){
 
     if (result.error) {
       // Show error to your customer (e.g., insufficient funds)
-      console.log(result.error.message);
+      console.log("ConfirmCardPayment Error: " + result.error.message);
+      setOrderStatus(result.error.message);
     } else {
       // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
@@ -72,10 +78,13 @@ function CheckoutForm(props){
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardSection />
-      <button disabled={!stripe}>Confirm order</button>
-    </form>
+    <div>
+    	<OrderConfirmation message={orderStatus}/>
+	    <form onSubmit={handleSubmit}>
+	      <CardSection />
+	      <button disabled={!stripe}>Confirm order</button>
+	    </form>
+    </div>
   );
 }
 
