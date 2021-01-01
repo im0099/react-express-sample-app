@@ -18,7 +18,7 @@ function CheckoutForm(props){
   //const initOrder = new Map([['id', orderId], ['item', props.bookId], ['price', '11.11']]);
   //const [order, setOrder] = useState(initOrder);
 
-  const saveOrder = () => {
+  const saveOrder = async () => {
     fetch('http://localhost:9000/orders', {
       method: 'POST',
       headers: {
@@ -30,10 +30,15 @@ function CheckoutForm(props){
     	price: props.book.price,
   	  }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        console.log("in Save Order1: " + res);
+
+        res.json()})
       .then((result) => {
-      	console.log("in fetch Order: " + result);
+      	console.log("in Save Order2: " + result);
       	//setOrder(result.rows);
+        props.onOrderPlaced("success");
+        props.history.push('/'); // assuming there aren't errors
   	})
       .catch((err) => console.log('error'+err))
   }
@@ -71,8 +76,6 @@ function CheckoutForm(props){
         // payment_intent.succeeded event that handles any business critical
         // post-payment actions.
         saveOrder(); // Save order when payment is successful
-        props.history.push('/'); // assuming there aren't errors
-    	props.onOrderPlaced("success");
       }
     }
   };
