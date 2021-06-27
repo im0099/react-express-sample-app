@@ -15,7 +15,7 @@ function BookContainer(props){
 
   return (
     <div>
-      <h2>Books</h2>
+      <h2>Books Voice Log</h2>
       {renderBooks()}
     </div>
   )
